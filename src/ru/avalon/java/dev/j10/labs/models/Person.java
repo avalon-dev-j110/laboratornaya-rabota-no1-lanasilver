@@ -1,5 +1,6 @@
 package ru.avalon.java.dev.j10.labs.models;
 import ru.avalon.java.dev.j10.labs.commons.Address;
+import ru.avalon.java.dev.j10.labs.models.Passport;
 
 /**
  * Представление о человеке.
@@ -75,10 +76,8 @@ public class Person {
      * @return адрес регистрации в виде строки.
      */
     public String getAddress() {
-        if (address.getResidentialAddress().equals(address.getRegistrationAddress())) {
-        return address.getRegistrationAddress();
-        } 
-    return address.getResidentialAddress();
+        
+    return passport.getRegistrationAddress().toString();
     }
     
 }
