@@ -1,4 +1,5 @@
 package ru.avalon.java.dev.j10.labs.models;
+import ru.avalon.java.dev.j10.labs.commons.Address;
 
 /**
  * Представление о человеке.
@@ -11,6 +12,23 @@ package ru.avalon.java.dev.j10.labs.models;
  * </ol>
  */
 public class Person {
+    
+    private Passport passport;
+    private Address address;
+
+    public Person(Passport passport) {
+        this.passport = passport;
+    }
+    
+    public Person(Address address) {
+        this.address = address;
+    }
+    
+    public Person (Passport passport, Address address) {
+        this.passport = passport;
+        this.address = address;
+    }
+    
 
     /**
      * Возврвщает полное имя человека.
@@ -29,25 +47,38 @@ public class Person {
      *
      * @return имя человека в виде строки.
      */
+    
     public String getFullName() {
-        /*
-         * TODO(Студент): Закончить определение метода 'getFullName()' класса 'Person'
-         */
-        return null;
+        if (passport.getFirstName() != null & passport.getLastName() != null & 
+                passport.getFathersName() != null) {
+            return String.format("%s %s %s", passport.getFirstName(), 
+                    passport.getLastName(), passport.getFathersName());
+        }
+        else if (passport.getFathersName() == null & passport.getMiddleName() != null) {
+            return String.format("%s %s. %s", passport.getFirstName(), 
+                    passport.getMiddleName().substring(0, 1), passport.getLastName());
+        }
+        else if (passport.getFathersName() == null & passport.getMiddleName() == null 
+                & passport.getFirstName() != null & passport.getLastName() != null) {
+            return String.format("%s %s", passport.getFirstName(), passport.getLastName());
+        }
+        return String.format("%s %s %s %s", passport.getLastName(), passport.getFirstName(), 
+                passport.getMiddleName(), passport.getFathersName());
     }
 
     /**
      * Возвращает адрес, по которому проживает человек.
      * <p>
-     * Возвращаемый адрес соответствует месту постоянной
+     * Возвращаемый адрес соответствует == месту постоянной
      * регистрации человека, согласно паспортным данным.
      *
      * @return адрес регистрации в виде строки.
      */
     public String getAddress() {
-        /*
-         * TODO(Студент): Закончить определение метода 'getAddress()' класса 'Person'
-         */
-        return null;
+        if (address.getResidentialAddress().equals(address.getRegistrationAddress())) {
+        return address.getRegistrationAddress();
+        } 
+    return address.getResidentialAddress();
     }
+    
 }
